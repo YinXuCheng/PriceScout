@@ -1,7 +1,7 @@
 class Person {
   
   //FIELDS
-  PVector position;
+  PVector position, velocity;
   int speed;
   Float money;
   color colour;
@@ -20,4 +20,5 @@ class Person {
   void drawme() {
     fill(colour);
     circle(pos.x, pos.y, personWidth);
+  }
 }
