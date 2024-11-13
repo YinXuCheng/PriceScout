@@ -7,7 +7,7 @@ class Store{
  Store(String n, float r, float aP){
   this.name = n;
   this.rating = r;
-  this.
+  this.avgPrice = aP;
  }
   
 }
