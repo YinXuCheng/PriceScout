@@ -1,2 +1,2 @@
 # PriceScout
- Repository for software project
+ Repository for software project yes
