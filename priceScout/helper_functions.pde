@@ -1,12 +1,10 @@
 float calculateAttractionPercentage(float price, float maxPrice, float rating, float maxRating, float competition, float maxCompetition, float customerBudget) {
     float attractionScore;
-
     if (customerBudget < price) {
         return 0; 
     }
 
     float budgetFactor = min(1, (customerBudget - price) / (maxPrice - price));
-
     float priceScore = 1 - (price / maxPrice);    
     float ratingScore = rating / maxRating;              
     float competitionScore = 1 - (competition / maxCompetition); 
