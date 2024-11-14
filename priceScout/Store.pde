@@ -11,3 +11,5 @@ class Store{
  }
   
 }
+
+//plot 1 coords: square(20, 20, 200);
