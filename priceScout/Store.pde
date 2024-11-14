@@ -1,15 +1,17 @@
+// ROUGH STORE FUNCTION
+
 class Store {
   float x, y, w, h;
   float price, rating, competition;
   
   Store(float x, float y, float w, float h) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.price = random(50, 150);
-    this.rating = random(1, 5);
-    this.competition = random(1, 10);
+    this.x = x; // x position of the store
+    this.y = y; // y position of the store
+    this.w = w; // store's width
+    this.h = h; // store's height
+    this.price = random(50, 150); // Set random price
+    this.rating = random(1, 5); // Set store ratings
+    this.competition = random(1, 10); // Set store competition
   }
   
   void display() {
