@@ -8,6 +8,7 @@ void setup(){
 // x, y, width, height
 void draw() {
   background(0,200,70);
+  // Store Plots
   noStroke();
   fill(220);
   rect(50, 20, 300, 183);
@@ -18,6 +19,12 @@ void draw() {
   
   rect(850, 20, 300, 183);
   rect(850, 500, 300, 183); 
+  
+  // Road
+  fill(100);
+  rect(0, 300, 1200, 100);
+  fill(230,200,0);
+  rect(0, 345, 1200, 10);
 }
 
   
