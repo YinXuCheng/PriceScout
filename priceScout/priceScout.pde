@@ -1,4 +1,8 @@
+int numPeople = 20;
+color red = color(255,0,0);
+
 Store[] stores = new Store[6]; 
+Person[] peoples = new Person[numPeople];
 
 void setup() {
   size(1200, 700);
@@ -14,6 +18,10 @@ void setup() {
   
   for (int i = 0; i < stores.length; i++) {
     stores[i] = new Store(storeNames[i], ratings[i], avgPrices[i], competitions[i], xPositions[i], yPositions[i]);
+  }
+  
+  for (int n = 0; n < numPeople; n++) {
+    peoples[n] = new Person(-20,375, int(random(5,10)), 100, red);
   }
 }
 
@@ -70,7 +78,13 @@ void draw() {
   for (Store store : stores) {
     store.display();
   }
+  
+  for (int n = 0; n < numPeople; n++) {
+     peoples[n].drawme();
+     peoples[n].update();
+  }
 }
+
 
 
 void mouseClicked() {
