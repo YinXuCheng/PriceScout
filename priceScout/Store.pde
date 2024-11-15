@@ -8,9 +8,11 @@ class Store{
   this.rating = r;
   this.avgPrice = aP;
   this.competition = c;
-  this.price = random(50, 150); // WILL BE CHANGED LATER FOR GUI COMPATIBILITY
-  this.rating = random(1, 5); // WILL BE CHANGED LATER FOR GUI COMPATIBILITY
-  this.competition = random(1, 10); // WILL BE CHANGED LATER FOR GUI COMPATIBILITY
+  
+  // this supposed to go in store class or helper functions?
+  //this.price = random(50, 150); // WILL BE CHANGED LATER FOR GUI COMPATIBILITY
+  //this.rating = random(1, 5); // WILL BE CHANGED LATER FOR GUI COMPATIBILITY
+  //this.competition = random(1, 10); // WILL BE CHANGED LATER FOR GUI COMPATIBILITY
  }
   
 }
