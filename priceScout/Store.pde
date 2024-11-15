@@ -1,20 +1,40 @@
-class Store{
-  
- String name;
- float rating, avgPrice, competition;
- 
- Store(String n, float r, float aP, float c){
-  this.name = n;
-  this.rating = r;
-  this.avgPrice = aP;
-  this.competition = c;
-  
-  // this supposed to go in store class or helper functions?
-  //this.price = random(50, 150); // WILL BE CHANGED LATER FOR GUI COMPATIBILITY
-  //this.rating = random(1, 5); // WILL BE CHANGED LATER FOR GUI COMPATIBILITY
-  //this.competition = random(1, 10); // WILL BE CHANGED LATER FOR GUI COMPATIBILITY
- }
-  
-}
+class Store {
+  String name;
+  float rating, avgPrice, competition, revenue;
+  float x, y;  
+  PImage storeImg;  
 
-//plot 1 coords: square(20, 20, 200);
+  // Constructor to initialize store properties and position
+  Store(String name, float rating, float avgPrice, float competition, float x, float y) {
+    this.name = name;
+    this.rating = rating;
+    this.avgPrice = avgPrice;
+    this.competition = competition;
+    this.revenue = 0;  
+    this.x = x;
+    this.y = y;
+    this.storeImg = loadImage("store.png");  
+  }
+
+  void display() {
+    image(this.storeImg, this.x, this.y);  
+    
+    fill(100);  
+    textSize(15);
+
+    if (this.y > 300) {
+      text(this.name, this.x + 10, this.y - 20);  
+      text("Revenue: $" + this.revenue, this.x + 10, this.y - 40);  
+    } 
+    
+    else {
+      text(this.name, this.x + 10, this.y + this.storeImg.height + 20);  
+      text("Revenue: $" + this.revenue, this.x + 10, this.y + this.storeImg.height + 40);  
+    }
+  }
+
+
+  void saleMade() {
+    this.revenue += this.avgPrice;
+  }
+}
