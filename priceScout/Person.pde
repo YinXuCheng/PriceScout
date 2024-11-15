@@ -2,17 +2,17 @@ class Person {
   
   //FIELDS
   PVector position; // the persons position
-  int speed; // the person speed
+  float speed; // the person speed
   Float money; // the persons budget
   color colour; // persons colour
-  int personWidth = 10; // width of a person
+  int personWidth = 15; // width of a person
   
   Store targetStore; // target store variable
   boolean isInStore; // true or false statement
   int storeEntryTime; // counts how long they are in the store so they leave after
   
   // CONSTRUCTOR
-  Person(int x, int y, int s, float m, color c) { // initializing variables
+  Person(int x, int y, float s, float m, color c) { // initializing variables
     this.position = new PVector(x, y);
     this.speed = s;
     this.money = m;
