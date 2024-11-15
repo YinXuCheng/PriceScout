@@ -8,7 +8,6 @@ void setup() {
   size(1200, 700);
   frameRate(30);
   
-  
   String[] storeNames = {"Store A", "Store B", "Store C", "Store D", "Store E", "Store F"};
   float[] ratings = {0, 0, 0, 0, 0, 0};
   float[] avgPrices = {10, 10, 10, 10, 10, 10};
@@ -22,6 +21,7 @@ void setup() {
   
   for (int n = 0; n < numPeople; n++) {
     peoples[n] = new Person(-20,375, random(1,20), 100, red);
+    peoples[n].chooseStore();
   }
 }
 
