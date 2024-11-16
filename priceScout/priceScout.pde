@@ -52,8 +52,13 @@ void draw() {
 
   fill(100);
   rect(0, 300, 1200, 100);
-  fill(230, 200, 0);
-  rect(0, 345, 1200, 10);
+  fill(230, 200, 0); // main road line
+
+ // for loop to create dotted lines on the main road
+  for (int x = 0; x < width; x += 20 + 20) {
+    rect(x, 345, 20, 10);
+  }
+
 
   fill(100);
   rect(160, 190, 80, 110);
