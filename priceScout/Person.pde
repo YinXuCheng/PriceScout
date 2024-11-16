@@ -1,107 +1,138 @@
 class Person {
-  
-  //FIELDS
-  PVector position; // the persons position
-  float speed; // the person speed
-  float money; // the persons budget
-  color colour; // persons colour
-  int personWidth = 15; // width of a person
-  
-  Store targetStore; // target store variable
-  boolean isInStore; // true or false statement
-  int storeEntryTime; // counts how long they are in the store so they leave after
+  // FIELDS
+  float x; // x position
+  float y; // y position
+  float speed;
+  float money;
+  color colour;
+  int personWidth = 15;
+  boolean movingRight;
+
+  Store targetStore;
+  boolean isInStore;
+  int storeEntryTime;
+  boolean isReturningToRoad;
   
   // CONSTRUCTOR
-  Person(int x, int y, float s, float m, color c) { // initializing variables
-    this.position = new PVector(x, y);
-    this.speed = s;
+  Person(float s, float m, color c) {
+    if (random(0, 1) > 0.5) {
+      this.movingRight = true;
+      this.x = -50;
+      this.y = 375;
+      this.speed = s;
+    } else {
+      this.movingRight = false;
+      this.x = width + 50;
+      this.y = 325;
+      this.speed = -s;
+    }
     this.money = m;
     this.colour = c;
-    this.targetStore = null; // will be chosen later
-    this.isInStore = false; // the person walks from the road, so they will initially NOT be in a store
-    this.storeEntryTime = 0; // timer/counter always starts from 0
+    this.targetStore = null;
+    this.isInStore = false;
+    this.storeEntryTime = 0;
+    this.isReturningToRoad = false;
   }
   
-  //METHODS
-  
-  // Draw the person
+  // METHODS
   void drawme() {
     fill(colour);
-    circle(position.x, position.y, personWidth);
+    circle(x, y, personWidth);
   }
   
-  // Update the persons position and state
   void update() {
     if (isInStore) {
       if (second() - storeEntryTime > 2) {
         leaveStore();
       }
-    } else if (targetStore != null) {  // if the target store is not not existing
-      moveOnRoad(); // first go to road then go to the store (people cant go through walls)
-      moveTowardsStore(); // move towards the store
+    } else if (isReturningToRoad) {
+      returnToRoad();
+    } else if (targetStore != null) {
+      float storeX = targetStore.position.x + 150;
+      float storeY = targetStore.position.y + 91.5;
+      
+      if (abs(x - storeX) > 1) {
+        moveOnRoad();
+      } else {
+        moveTowardsStore(storeX, storeY);
+      }
     } else {
-      moveOnRoad();  // move to road only
+      moveOnRoad();
     }
   }
-  
-  // Move along the road
+
   void moveOnRoad() {
-    position.x += speed;
-    if (position.x > width + 50 || position.x < -50) {
+    x = x + speed;
+    if (movingRight) {
+      y = 375;
+    } else {
+      y = 325;
+    }
+    
+    if (x > width + 50 || x < -50) {
+      movingRight = !movingRight;
+      if (movingRight) {
+        x = -50;
+        y = 375;
+        speed = abs(speed);
+      } else {
+        x = width + 50;
+        y = 325;
+        speed = -abs(speed);
+      }
       chooseStore();
     }
   }
-  
-  // Move towards the target store
-  void moveTowardsStore() {
-    PVector storeCenter = new PVector(targetStore.position.x + 150, targetStore.position.y + 91.5);
-    PVector direction = PVector.sub(storeCenter, position);
-    direction.normalize();
-    direction.mult(speed);
-    position.add(direction);
+
+  void moveTowardsStore(float storeX, float storeY) {
+    if (abs(y - storeY) > 1) {
+      if (storeY > y) {
+        y = y + abs(speed);
+      } else {
+        y = y - abs(speed);
+      }
+    }
     
-    if (PVector.dist(position, storeCenter) < 5) {
+    if (dist(x, y, storeX, storeY) < 5) {
       enterStore();
     }
   }
   
-  // Enter a store
   void enterStore() {
     isInStore = true;
     storeEntryTime = second();
-    position = new PVector(targetStore.position.x + 150, targetStore.position.y + 91.5);
+    x = targetStore.position.x + 150;
+    y = targetStore.position.y + 91.5;
   }
   
-  // Leave a store
   void leaveStore() {
     isInStore = false;
-    position.y = 350; // Back to road
+    isReturningToRoad = true;
     targetStore.saleMade();
-    chooseStore();
   }
-  
- void chooseStore() {
-   float[] attractions = new float[stores.length];
-   float totalAttraction = 0;
-   
-   for (int i = 0; i < stores.length; i++) {
-     attractions[i] = calculateAttractionPercentage(stores[i].avgPrice, maxPrice, stores[i].rating, maxRating, stores[i].competition, maxCompetition, this.money);
-     totalAttraction += attractions[i];
-   }
-   
-   if (totalAttraction > 0) {
-     float randomValue = random(0, totalAttraction);
-     float cumulativeAttraction = 0;
-       for (int i = 0; i < stores.length; i++) {
-          cumulativeAttraction += attractions[i];
-          if (randomValue <= cumulativeAttraction) {
-              targetStore = stores[i];
-              break;
-        }
-      }
+
+  void returnToRoad() {
+    float targetY;
+    if (movingRight) {
+      targetY = 375;
+    } else {
+      targetY = 325;
     }
     
-    if (targetStore == null)
-      targetStore = stores[int(random(stores.length))];
+    if (abs(y - targetY) > 1) {
+      if (targetY > y) {
+        y = y + abs(speed);
+      } else {
+        y = y - abs(speed);
+      }
+    } else {
+      y = targetY;
+      isReturningToRoad = false;
+      chooseStore();
+    }
+  }
+  
+  void chooseStore() {
+    targetStore = stores[int(random(stores.length))];
   }
 }
