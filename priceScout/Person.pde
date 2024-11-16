@@ -3,7 +3,7 @@ class Person {
   //FIELDS
   PVector position; // the persons position
   float speed; // the person speed
-  Float money; // the persons budget
+  float money; // the persons budget
   color colour; // persons colour
   int personWidth = 15; // width of a person
   
@@ -80,34 +80,28 @@ class Person {
     chooseStore();
   }
   
-  // Choose a store based on attraction
-  void chooseStore() {
-    targetStore = null;
-    float[] attractions = new float[6];
-    float totalAttraction = 0;
-    
-    // Calculate attraction for each store
-    for (int i = 0; i < 6; i++) {
-      attractions[i] = calculateAttractionPercentage(stores[i].avgPrice, 20, stores[i].rating, 5, stores[i].competition, 2, money);
-      totalAttraction += attractions[i];
-    }
-    
-    // Choose a store based on weighted probabilities
-    if (totalAttraction > 0) {
-      float randomValue = random(totalAttraction);
-      float sum = 0;
-      for (int i = 0; i < 6; i++) {
-        sum += attractions[i];
-        if (randomValue <= sum) {
-          targetStore = stores[i];
-          break;
+ void chooseStore() {
+   float[] attractions = new float[stores.length];
+   float totalAttraction = 0;
+   
+   for (int i = 0; i < stores.length; i++) {
+     attractions[i] = calculateAttractionPercentage(stores[i].avgPrice, maxPrice, stores[i].rating, maxRating, stores[i].competition, maxCompetition, this.money);
+     totalAttraction += attractions[i];
+   }
+   
+   if (totalAttraction > 0) {
+     float randomValue = random(0, totalAttraction);
+     float cumulativeAttraction = 0;
+       for (int i = 0; i < stores.length; i++) {
+          cumulativeAttraction += attractions[i];
+          if (randomValue <= cumulativeAttraction) {
+              targetStore = stores[i];
+              break;
         }
       }
     }
     
-    // If no store was chosen (all attractions were 0), choose a random store
-    if (targetStore == null) {
-      targetStore = stores[int(random(6))];
-    }
+    if (targetStore == null)
+      targetStore = stores[int(random(stores.length))];
   }
 }

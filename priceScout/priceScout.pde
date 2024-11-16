@@ -1,5 +1,9 @@
-int numPeople = 10000;
+int numPeople = 20;
 color red = color(255,0,0);
+
+float maxPrice = 20;
+float maxRating = 5;
+float maxCompetition = 2;
 
 Store[] stores = new Store[6]; 
 Person[] peoples = new Person[numPeople];
