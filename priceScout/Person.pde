@@ -97,7 +97,12 @@ class Person {
   void enterStore() {
     isInStore = true;
     storeEntryTime = second();
-    position.set(targetStore.position.x + 150, targetStore.position.y + 91.5);
+    if (targetStore.position.y <= 300) {
+      position.set(targetStore.position.x + 125, targetStore.position.y + 91.5);
+    }
+     else if (targetStore.position.y >= 300) {
+      position.set(targetStore.position.x + 175, targetStore.position.y + 91.5);
+     }
   }
   
     void leaveStore() {
