@@ -142,6 +142,29 @@ class Person {
   }
   
   void chooseStore() {
-    targetStore = stores[int(random(stores.length))];
+   float[] attractions = new float[stores.length];
+   float totalAttraction = 0;
+   
+   for (int i = 0; i < stores.length; i++) {
+     attractions[i] = calculateAttractionPercentage(stores[i].avgPrice, maxPrice, stores[i].rating, maxRating, stores[i].competition, maxCompetition, this.money);
+     totalAttraction += attractions[i];
+   }
+   
+   if (totalAttraction > 0) {
+     float randomValue = random(0, totalAttraction);
+     float cumulativeAttraction = 0;
+       for (int i = 0; i < stores.length; i++) {
+          cumulativeAttraction += attractions[i];
+          if (randomValue <= cumulativeAttraction) {
+              targetStore = stores[i];
+              break;
+        }
+      }
+    }
+
+    // If no store was chosen (all attractions were 0), choose a random store
+    if (targetStore == null) {
+      targetStore = stores[int(random(6))];
+    }
   }
 }
