@@ -90,14 +90,15 @@ void draw() {
   fill(230, 200, 0);
   rect(996, 400, 10, 105);
 
-  for (Store store : stores) {
-    store.display();
-  }
-
   for (int n = 0; n < numPeople; n++) {
      peoples[n].drawme();
      peoples[n].update();
   }
+  for (Store store : stores) {
+    store.display();
+  }
+
+  
 }
 
 
