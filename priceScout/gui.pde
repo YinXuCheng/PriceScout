@@ -23,7 +23,8 @@ public void amountOfPeopleChanged(GCustomSlider source, GEvent event) { //_CODE_
 } //_CODE_:numPeoples:824157:
 
 public void speedValueChanged(GCustomSlider source, GEvent event) { //_CODE_:speedValue:603430:
-  println("speedValue - GCustomSlider >> GEvent." + event + " @ " + millis());
+  framePerSecond = speedValue.getValueI(); 
+  frameRate(framePerSecond);
 } //_CODE_:speedValue:603430:
 
 public void storeValChanged(GCustomSlider source, GEvent event) { //_CODE_:numStores:836312:

@@ -2,6 +2,7 @@ import g4p_controls.*;
 
 int numPeople = 20;
 color red = color(255, 0, 0);
+int framePerSecond = 30;
 
 float maxPrice = 20;
 float maxRating = 5;
@@ -12,7 +13,7 @@ Person[] peoples = new Person[numPeople];
 
 void setup() {
   size(1200, 700);
-  frameRate(30);
+  frameRate(framePerSecond);
 
   String[] storeNames = {"Store A", "Store B", "Store C", "Store D", "Store E", "Store F"};
   float[] ratings = {0, 0, 0, 0, 0, 0};
