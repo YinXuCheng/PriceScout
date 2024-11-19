@@ -51,7 +51,7 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  window1 = GWindow.getWindow(this, "Window title", 0, 0, 450, 300, JAVA2D);
+  window1 = GWindow.getWindow(this, "Window title", 0, 0, 700, 500, JAVA2D);
   window1.noLoop();
   window1.setActionOnClose(G4P.KEEP_OPEN);
   window1.addDrawHandler(this, "win_draw1");
@@ -79,7 +79,7 @@ public void createGUI(){
   label2.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label2.setText("Stores");
   label2.setOpaque(false);
-  numStores = new GCustomSlider(window1, 17, 241, 100, 40, "grey_blue");
+  numStores = new GCustomSlider(window1, 20, 244, 100, 40, "grey_blue");
   numStores.setLimits(6, 1, 6);
   numStores.setNbrTicks(6);
   numStores.setNumberFormat(G4P.INTEGER, 0);
