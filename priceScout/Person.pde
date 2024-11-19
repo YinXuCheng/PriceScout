@@ -84,10 +84,19 @@ class Person {
   }
 
   void moveTowardsStore(PVector storeCenter) {
+    if (targetStore.position.y <= 300) {
+      PVector direction = PVector.sub(storeCenter, position);
+      direction.normalize();
+      direction.mult(abs(velocity.x));  // Use the same speed as on the road
+      position.add(direction);
+    }
+    
+    if (targetStore.position.y >= 300) {
     PVector direction = PVector.sub(storeCenter, position);
     direction.normalize();
     direction.mult(abs(velocity.x));  // Use the same speed as on the road
     position.add(direction);
+    }
     
     if (PVector.dist(position, storeCenter) < 5) {
       enterStore();

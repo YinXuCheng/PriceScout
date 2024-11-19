@@ -1,3 +1,5 @@
+import g4p_controls.*;
+
 int numPeople = 20;
 color red = color(255, 0, 0);
 
@@ -32,6 +34,7 @@ void setup() {
     peoples[n] = new Person(speed, money, personColor);
     peoples[n].chooseStore();
   }
+  createGUI();
 }
 
 void draw() {
