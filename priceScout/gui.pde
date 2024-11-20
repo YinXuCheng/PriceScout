@@ -48,7 +48,6 @@ public void speedValueChanged(GCustomSlider source, GEvent event) { //_CODE_:spe
 } //_CODE_:speedValue:603430:
 
 public void storeValChanged(GCustomSlider source, GEvent event) { //_CODE_:storeNum:836312:
-  println("numStores - GCustomSlider >> GEvent." + event + " @ " + millis());
   numStores = storeNum.getValueI();
 } //_CODE_:storeNum:836312:
 

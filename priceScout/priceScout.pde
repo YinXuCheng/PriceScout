@@ -18,7 +18,7 @@ void setup() {
 
   String[] storeNames = {"Store A", "Store B", "Store C", "Store D", "Store E", "Store F"};
   float[] ratings = {0, 0, 0, 0, 0, 0};
-  float[] avgPrices = {10, 20, 15, 30, 40, 50};
+  float[] avgPrices = {10, 20, 15, 19, 16, 20};
   float[] competitions = {2.0, 1.5, 1.2, 1.0, 1.8, 1.3};
   float[] xPositions = {50, 50, 455, 455, 850, 850};
   float[] yPositions = {20, 500, 20, 500, 20, 500};
