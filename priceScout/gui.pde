@@ -54,13 +54,16 @@ public void storeValChanged(GCustomSlider source, GEvent event) { //_CODE_:store
 
 public void ratingValueChanged(GCustomSlider source, GEvent event) { //_CODE_:ratingValue:654194:
   stores[storeSelected].rating = ratingValue.getValueF();
-  println(stores[storeSelected].name, stores[storeSelected].rating);
 } //_CODE_:ratingValue:654194:
 
 public void priceValueChanged(GCustomSlider source, GEvent event) { //_CODE_:priceValue:334359:
+  stores[storeSelected].avgPrice = priceValue.getValueF();
+  reset();
 } //_CODE_:priceValue:334359:
 
 public void competitionValueChanged(GCustomSlider source, GEvent event) { //_CODE_:competitionValue:262810:
+ stores[storeSelected].competition = competitionValue.getValueF();
+ reset();
 } //_CODE_:competitionValue:262810:
 
 public void pauseButtonClicked(GButton source, GEvent event) { //_CODE_:pauseButton:257018:
@@ -83,8 +86,11 @@ public void restartButtonClicked(GButton source, GEvent event) { //_CODE_:restar
   reset();
 } //_CODE_:restartButton:260887:
 
-public void storeSelectionChanged(GDropList source, GEvent event) { //_CODE_:storeSelection:802738:
-  if (storeSelection.getText().equals("Store A")) {
+public void imgButton1_click1(GImageButton source, GEvent event) { //_CODE_:imgButton1:602797:
+} //_CODE_:imgButton1:602797:
+
+public void storeSelectionChanged(GTextField source, GEvent event) { //_CODE_:storeSelection:386701:
+   if (storeSelection.getText().equals("Store A")) {
     storeSelected = 0;
   }
   if (storeSelection.getText().equals("Store B")) {
@@ -102,10 +108,7 @@ public void storeSelectionChanged(GDropList source, GEvent event) { //_CODE_:sto
   if (storeSelection.getText().equals("Store F")) {
     storeSelected = 5;
   }
-} //_CODE_:storeSelection:802738:
-
-public void imgButton1_click1(GImageButton source, GEvent event) { //_CODE_:imgButton1:602797:
-} //_CODE_:imgButton1:602797:
+} //_CODE_:storeSelection:386701:
 
 
 
@@ -188,11 +191,11 @@ public void createGUI(){
   restartButton.setText("RESET");
   restartButton.setLocalColorScheme(GCScheme.GOLD_SCHEME);
   restartButton.addEventHandler(this, "restartButtonClicked");
-  storeSelection = new GDropList(window1, 544, 22, 120, 210, 6, 10);
-  storeSelection.setItems(loadStrings("list_802738"), 0);
-  storeSelection.addEventHandler(this, "storeSelectionChanged");
   imgButton1 = new GImageButton(window1, 178, 11, 191, 172, new String[] { "PRICE SCOUT Logo without background black.png", "PRICE SCOUT Logo without background black.png", "PRICE SCOUT Logo without background black.png" } );
   imgButton1.addEventHandler(this, "imgButton1_click1");
+  storeSelection = new GTextField(window1, 513, 43, 120, 30, G4P.SCROLLBARS_NONE);
+  storeSelection.setOpaque(true);
+  storeSelection.addEventHandler(this, "storeSelectionChanged");
   window1.loop();
 }
 
@@ -213,5 +216,5 @@ GLabel label5;
 GCustomSlider competitionValue; 
 GButton pauseButton; 
 GButton restartButton; 
-GDropList storeSelection; 
 GImageButton imgButton1; 
+GTextField storeSelection; 
