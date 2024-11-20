@@ -20,11 +20,14 @@ class Person {
       this.movingRight = true;
       this.position = new PVector(-50, 375);
       this.velocity = new PVector(speed, 0);
-    } else {
+    } 
+    
+    else {
       this.movingRight = false;
       this.position = new PVector(width + 50, 325);
       this.velocity = new PVector(-speed, 0);
     }
+    
     this.targetPosition = this.position.copy();
     this.money = m;
     this.colour = c;
@@ -45,17 +48,25 @@ class Person {
       if (second() - storeEntryTime > 2) {
         leaveStore();
       }
-    } else if (isReturningToRoad) {
+    } 
+    
+    else if (isReturningToRoad) {
       returnToRoad();
-    } else if (targetStore != null) {
+    } 
+    
+    else if (targetStore != null) {
       PVector storeCenter = new PVector(targetStore.position.x + 150, targetStore.position.y + 91.5);
       
       if (abs(position.x - storeCenter.x) > 1) {
         moveOnRoad();
-      } else {
+      } 
+      
+      else {
         moveTowardsStore(storeCenter);
       }
-    } else {
+    } 
+    
+    else {
       moveOnRoad();
     }
   }
@@ -74,10 +85,13 @@ class Person {
       if (movingRight) {
         position.x = -50;
         position.y = 375;
-      } else {
+      }
+      
+      else {
         position.x = width + 50;
         position.y = 325;
       }
+      
       velocity.x *= -1;
       chooseStore();
     }
@@ -92,10 +106,10 @@ class Person {
     }
     
     if (targetStore.position.y >= 300) {
-    PVector direction = PVector.sub(storeCenter, position);
-    direction.normalize();
-    direction.mult(abs(velocity.x));  // Use the same speed as on the road
-    position.add(direction);
+      PVector direction = PVector.sub(storeCenter, position);
+      direction.normalize();
+      direction.mult(abs(velocity.x));  // Use the same speed as on the road
+      position.add(direction);
     }
     
     if (PVector.dist(position, storeCenter) < 5) {
@@ -109,12 +123,13 @@ class Person {
     if (targetStore.position.y <= 300) {
       position.set(targetStore.position.x + 125, targetStore.position.y + 91.5);
     }
+    
      else if (targetStore.position.y >= 300) {
       position.set(targetStore.position.x + 175, targetStore.position.y + 91.5);
      }
   }
   
-    void leaveStore() {
+  void leaveStore() {
     isInStore = false;
     isReturningToRoad = true;
     returningVertically = true;  // Start with vertical movement
@@ -135,7 +150,9 @@ class Person {
         returningVertically = false;
         targetPosition.x = movingRight ? width + 50 : -50;
       }
-    } else {
+    }
+    
+    else {
       // Move horizontally
       float dx = targetPosition.x - position.x;
       float moveX = min(abs(dx), abs(velocity.x)) * sign(dx);

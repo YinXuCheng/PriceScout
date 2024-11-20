@@ -9,7 +9,7 @@ float maxRating = 5;
 float maxCompetition = 2;
 
 Store[] stores = new Store[6]; 
-Person[] peoples = new Person[numPeople];
+ArrayList<Person> peoples = new ArrayList<Person>();
 
 void setup() {
   size(1200, 700);
@@ -32,9 +32,11 @@ void setup() {
     float money = random(10, 100);  // Random money between 10 and 100
     color personColor = color(250, 10, 0);  // Random color
     
-    peoples[n] = new Person(speed, money, personColor);
-    peoples[n].chooseStore();
+    Person person = new Person(speed, money, personColor);
+    person.chooseStore();
+    peoples.add(person);
   }
+  
   createGUI();
 }
 
@@ -94,10 +96,12 @@ void draw() {
   fill(230, 200, 0);
   rect(996, 400, 10, 105);
 
-  for (int n = 0; n < numPeople; n++) {
-     peoples[n].drawme();
-     peoples[n].update();
+  for (int i = 0; i < peoples.size(); i++) {
+      Person person = peoples.get(i);
+      person.drawme();
+      person.update();
   }
+  
   for (Store store : stores) {
     store.display();
   }

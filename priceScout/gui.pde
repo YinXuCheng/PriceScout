@@ -19,7 +19,27 @@ synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:windo
 } //_CODE_:window1:251840:
 
 public void amountOfPeopleChanged(GCustomSlider source, GEvent event) { //_CODE_:numPeoples:824157:
-  println("numPeople - GCustomSlider >> GEvent." + event + " @ " + millis());
+  int newNumPeople = numPeoples.getValueI();
+  int currentNumPeople = peoples.size();
+
+  if (newNumPeople > currentNumPeople) {
+     for (int i = 0; i < newNumPeople - currentNumPeople; i++) {
+         float speed = random(5, 10); 
+         float money = random(10, 100); 
+         color personColor = color(250, 10, 0);
+      
+         Person person = new Person(speed, money, personColor);
+         person.chooseStore(); 
+         peoples.add(person); 
+       }
+    } 
+    
+    else if (newNumPeople < currentNumPeople) {
+        for (int i = 0; i < currentNumPeople - newNumPeople; i++) {
+            peoples.remove(peoples.size() - 1);
+        }
+    }
+
 } //_CODE_:numPeoples:824157:
 
 public void speedValueChanged(GCustomSlider source, GEvent event) { //_CODE_:speedValue:603430:
