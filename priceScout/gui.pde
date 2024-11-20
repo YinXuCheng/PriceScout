@@ -65,11 +65,22 @@ public void custom_slider3_change1(GCustomSlider source, GEvent event) { //_CODE
 } //_CODE_:custom_slider3:262810:
 
 public void pauseButtonClicked(GButton source, GEvent event) { //_CODE_:pauseButton:257018:
-  println("pauseButton - GButton >> GEvent." + event + " @ " + millis());
+  isPaused = !isPaused;
+  
+  if (pauseButton.getText().equals("PAUSE")) {
+    pauseButton.setText("RESUME");
+    pauseButton.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+    noLoop();
+  }
+  
+  else {
+    pauseButton.setText("PAUSE");
+    pauseButton.setLocalColorScheme(GCScheme.RED_SCHEME);
+    loop();
+  }
 } //_CODE_:pauseButton:257018:
 
 public void restartButtonClicked(GButton source, GEvent event) { //_CODE_:restartButton:260887:
-  println("restartButton - GButton >> GEvent." + event + " @ " + millis());
   reset();
 } //_CODE_:restartButton:260887:
 

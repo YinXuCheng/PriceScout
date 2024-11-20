@@ -5,6 +5,8 @@ int numPeople = 20;
 color red = color(255, 0, 0);
 int framePerSecond = 30;
 
+boolean isPaused = false;
+
 float maxPrice = 100;
 float maxRating = 5;
 float maxCompetition = 2;
