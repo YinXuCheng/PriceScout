@@ -1,5 +1,7 @@
 import g4p_controls.*;
 
+
+int storeSelected = 0;
 int numStores = 6;
 int numPeople = 20;
 color red = color(255, 0, 0);

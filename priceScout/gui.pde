@@ -53,16 +53,15 @@ public void storeValChanged(GCustomSlider source, GEvent event) { //_CODE_:store
 } //_CODE_:storeNum:836312:
 
 public void ratingValueChanged(GCustomSlider source, GEvent event) { //_CODE_:ratingValue:654194:
-  println("custom_slider1 - GCustomSlider >> GEvent." + event + " @ " + millis());
+  stores[storeSelected].rating = ratingValue.getValueF();
+  println(stores[storeSelected].name, stores[storeSelected].rating);
 } //_CODE_:ratingValue:654194:
 
 public void priceValueChanged(GCustomSlider source, GEvent event) { //_CODE_:priceValue:334359:
-  println("custom_slider2 - GCustomSlider >> GEvent." + event + " @ " + millis());
 } //_CODE_:priceValue:334359:
 
-public void custom_slider3_change1(GCustomSlider source, GEvent event) { //_CODE_:custom_slider3:262810:
-  println("custom_slider3 - GCustomSlider >> GEvent." + event + " @ " + millis());
-} //_CODE_:custom_slider3:262810:
+public void competitionValueChanged(GCustomSlider source, GEvent event) { //_CODE_:competitionValue:262810:
+} //_CODE_:competitionValue:262810:
 
 public void pauseButtonClicked(GButton source, GEvent event) { //_CODE_:pauseButton:257018:
   isPaused = !isPaused;
@@ -84,9 +83,29 @@ public void restartButtonClicked(GButton source, GEvent event) { //_CODE_:restar
   reset();
 } //_CODE_:restartButton:260887:
 
-public void dropList1_click1(GDropList source, GEvent event) { //_CODE_:dropList1:802738:
-  println("dropList1 - GDropList >> GEvent." + event + " @ " + millis());
-} //_CODE_:dropList1:802738:
+public void storeSelectionChanged(GDropList source, GEvent event) { //_CODE_:storeSelection:802738:
+  if (storeSelection.getText().equals("Store A")) {
+    storeSelected = 0;
+  }
+  if (storeSelection.getText().equals("Store B")) {
+    storeSelected = 1;
+  }
+  if (storeSelection.getText().equals("Store C")) {
+    storeSelected = 2;
+  }
+  if (storeSelection.getText().equals("Store D")) {
+    storeSelected = 3;
+  }
+  if (storeSelection.getText().equals("Store E")) {
+    storeSelected = 4;
+  }
+  if (storeSelection.getText().equals("Store F")) {
+    storeSelected = 5;
+  }
+} //_CODE_:storeSelection:802738:
+
+public void imgButton1_click1(GImageButton source, GEvent event) { //_CODE_:imgButton1:602797:
+} //_CODE_:imgButton1:602797:
 
 
 
@@ -155,11 +174,12 @@ public void createGUI(){
   label5.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label5.setText("Competition");
   label5.setOpaque(false);
-  custom_slider3 = new GCustomSlider(window1, 258, 434, 200, 40, "grey_blue");
-  custom_slider3.setLimits(0.5, 0.0, 1.0);
-  custom_slider3.setNumberFormat(G4P.DECIMAL, 2);
-  custom_slider3.setOpaque(false);
-  custom_slider3.addEventHandler(this, "custom_slider3_change1");
+  competitionValue = new GCustomSlider(window1, 258, 434, 200, 40, "grey_blue");
+  competitionValue.setLimits(2, 1, 5);
+  competitionValue.setNbrTicks(5);
+  competitionValue.setNumberFormat(G4P.INTEGER, 0);
+  competitionValue.setOpaque(false);
+  competitionValue.addEventHandler(this, "competitionValueChanged");
   pauseButton = new GButton(window1, 35, 74, 80, 30);
   pauseButton.setText("PAUSE");
   pauseButton.setLocalColorScheme(GCScheme.RED_SCHEME);
@@ -168,9 +188,11 @@ public void createGUI(){
   restartButton.setText("RESET");
   restartButton.setLocalColorScheme(GCScheme.GOLD_SCHEME);
   restartButton.addEventHandler(this, "restartButtonClicked");
-  dropList1 = new GDropList(window1, 544, 22, 120, 210, 6, 10);
-  dropList1.setItems(loadStrings("list_802738"), 0);
-  dropList1.addEventHandler(this, "dropList1_click1");
+  storeSelection = new GDropList(window1, 544, 22, 120, 210, 6, 10);
+  storeSelection.setItems(loadStrings("list_802738"), 0);
+  storeSelection.addEventHandler(this, "storeSelectionChanged");
+  imgButton1 = new GImageButton(window1, 178, 11, 191, 172, new String[] { "PRICE SCOUT Logo without background black.png", "PRICE SCOUT Logo without background black.png", "PRICE SCOUT Logo without background black.png" } );
+  imgButton1.addEventHandler(this, "imgButton1_click1");
   window1.loop();
 }
 
@@ -188,7 +210,8 @@ GCustomSlider ratingValue;
 GLabel label4; 
 GCustomSlider priceValue; 
 GLabel label5; 
-GCustomSlider custom_slider3; 
+GCustomSlider competitionValue; 
 GButton pauseButton; 
 GButton restartButton; 
-GDropList dropList1; 
+GDropList storeSelection; 
+GImageButton imgButton1; 
