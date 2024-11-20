@@ -176,7 +176,7 @@ class Person {
    float[] attractions = new float[stores.length];
    float totalAttraction = 0;
    
-   for (int i = 0; i < stores.length; i++) {
+   for (int i = 0; i < numStores; i++) {
      attractions[i] = calculateAttractionPercentage(stores[i].avgPrice, maxPrice, stores[i].rating, maxRating, stores[i].competition, maxCompetition, this.money);
      totalAttraction += attractions[i];
    }

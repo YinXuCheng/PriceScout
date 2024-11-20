@@ -47,9 +47,10 @@ public void speedValueChanged(GCustomSlider source, GEvent event) { //_CODE_:spe
   frameRate(framePerSecond);
 } //_CODE_:speedValue:603430:
 
-public void storeValChanged(GCustomSlider source, GEvent event) { //_CODE_:numStores:836312:
+public void storeValChanged(GCustomSlider source, GEvent event) { //_CODE_:storeNum:836312:
   println("numStores - GCustomSlider >> GEvent." + event + " @ " + millis());
-} //_CODE_:numStores:836312:
+  numStores = storeNum.getValueI();
+} //_CODE_:storeNum:836312:
 
 public void custom_slider1_change1(GCustomSlider source, GEvent event) { //_CODE_:custom_slider1:654194:
   println("custom_slider1 - GCustomSlider >> GEvent." + event + " @ " + millis());
@@ -100,12 +101,12 @@ public void createGUI(){
   label2.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label2.setText("Stores");
   label2.setOpaque(false);
-  numStores = new GCustomSlider(window1, 20, 244, 100, 40, "grey_blue");
-  numStores.setLimits(6, 1, 6);
-  numStores.setNbrTicks(6);
-  numStores.setNumberFormat(G4P.INTEGER, 0);
-  numStores.setOpaque(false);
-  numStores.addEventHandler(this, "storeValChanged");
+  storeNum = new GCustomSlider(window1, 20, 244, 100, 40, "grey_blue");
+  storeNum.setLimits(6, 1, 6);
+  storeNum.setNbrTicks(6);
+  storeNum.setNumberFormat(G4P.INTEGER, 0);
+  storeNum.setOpaque(false);
+  storeNum.addEventHandler(this, "storeValChanged");
   label3 = new GLabel(window1, 250, 12, 80, 20);
   label3.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label3.setText("Ratings");
@@ -144,7 +145,7 @@ GLabel label1;
 GLabel label6; 
 GCustomSlider speedValue; 
 GLabel label2; 
-GCustomSlider numStores; 
+GCustomSlider storeNum; 
 GLabel label3; 
 GCustomSlider custom_slider1; 
 GLabel label4; 

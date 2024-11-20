@@ -1,5 +1,6 @@
 import g4p_controls.*;
 
+int numStores = 6;
 int numPeople = 20;
 color red = color(255, 0, 0);
 int framePerSecond = 30;
@@ -102,16 +103,9 @@ void draw() {
       person.update();
   }
   
-  for (Store store : stores) {
-    store.display();
+  for (int x = 0; x < numStores; x++) {
+    stores[x].display();
   }
 
   
 }
-
-
-//void mouseClicked() {
-//  for (Store store : stores) {
-//    store.saleMade();
-//  }
-//}
