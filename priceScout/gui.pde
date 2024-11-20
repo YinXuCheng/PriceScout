@@ -49,6 +49,7 @@ public void speedValueChanged(GCustomSlider source, GEvent event) { //_CODE_:spe
 
 public void storeValChanged(GCustomSlider source, GEvent event) { //_CODE_:storeNum:836312:
   numStores = storeNum.getValueI();
+  reset();
 } //_CODE_:storeNum:836312:
 
 public void ratingValueChanged(GCustomSlider source, GEvent event) { //_CODE_:ratingValue:654194:
@@ -69,6 +70,7 @@ public void pauseButtonClicked(GButton source, GEvent event) { //_CODE_:pauseBut
 
 public void restartButtonClicked(GButton source, GEvent event) { //_CODE_:restartButton:260887:
   println("restartButton - GButton >> GEvent." + event + " @ " + millis());
+  reset();
 } //_CODE_:restartButton:260887:
 
 public void dropList1_click1(GDropList source, GEvent event) { //_CODE_:dropList1:802738:

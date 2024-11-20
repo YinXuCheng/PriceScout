@@ -10,21 +10,31 @@ float maxRating = 5;
 float maxCompetition = 2;
 
 Store[] stores = new Store[6]; 
-ArrayList<Person> peoples = new ArrayList<Person>();
+ArrayList<Person> peoples;
 
 void setup() {
   size(1200, 700);
   frameRate(framePerSecond);
 
+ 
+
+
+ 
+  reset();
+  createGUI();
+}
+
+void reset(){
+  peoples = new ArrayList<Person>();
+  
   String[] storeNames = {"Store A", "Store B", "Store C", "Store D", "Store E", "Store F"};
   float[] ratings = {0, 0, 0, 0, 0, 0};
   float[] avgPrices = {10, 20, 15, 19, 16, 20};
   float[] competitions = {2.0, 1.5, 1.2, 1.0, 1.8, 1.3};
   float[] xPositions = {50, 50, 455, 455, 850, 850};
   float[] yPositions = {20, 500, 20, 500, 20, 500};
-
-
-  for (int i = 0; i < stores.length; i++) {
+  
+   for (int i = 0; i < stores.length; i++) {
     stores[i] = new Store(storeNames[i], ratings[i], avgPrices[i], competitions[i], xPositions[i], yPositions[i]);
   }
 
@@ -37,10 +47,7 @@ void setup() {
     person.chooseStore();
     peoples.add(person);
   }
-  
-  createGUI();
 }
-
 void draw() {
   background(0, 200, 70);
 
