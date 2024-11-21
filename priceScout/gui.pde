@@ -19,26 +19,8 @@ synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:windo
 } //_CODE_:window1:251840:
 
 public void amountOfPeopleChanged(GCustomSlider source, GEvent event) { //_CODE_:numPeoples:824157:
-  int newNumPeople = numPeoples.getValueI();
-  int currentNumPeople = peoples.size();
-
-  if (newNumPeople > currentNumPeople) {
-     for (int i = 0; i < newNumPeople - currentNumPeople; i++) {
-         float speed = random(5, 10); 
-         float money = random(10, 100); 
-         color personColor = color(250, 10, 0);
-      
-         Person person = new Person(speed, money, personColor);
-         person.chooseStore(); 
-         peoples.add(person); 
-       }
-    } 
-    
-    else if (newNumPeople < currentNumPeople) {
-        for (int i = 0; i < currentNumPeople - newNumPeople; i++) {
-            peoples.remove(peoples.size() - 1);
-        }
-    }
+  numPeople = numPeoples.getValueI();
+  reset();
 
 } //_CODE_:numPeoples:824157:
 
@@ -53,16 +35,21 @@ public void storeValChanged(GCustomSlider source, GEvent event) { //_CODE_:store
 } //_CODE_:storeNum:836312:
 
 public void ratingValueChanged(GCustomSlider source, GEvent event) { //_CODE_:ratingValue:654194:
-  stores[storeSelected].rating = ratingValue.getValueF();
+  ratings[storeSelected] = ratingValue.getValueF();
+  reset();
+  println(stores[storeSelected].name, stores[storeSelected].rating);
 } //_CODE_:ratingValue:654194:
 
 public void priceValueChanged(GCustomSlider source, GEvent event) { //_CODE_:priceValue:334359:
-  stores[storeSelected].avgPrice = priceValue.getValueF();
+  avgPrices[storeSelected] = priceValue.getValueF();
   reset();
+  println(stores[storeSelected].name, stores[storeSelected].avgPrice);
+  //reset();
 } //_CODE_:priceValue:334359:
 
 public void competitionValueChanged(GCustomSlider source, GEvent event) { //_CODE_:competitionValue:262810:
  stores[storeSelected].competition = competitionValue.getValueF();
+ println( stores[storeSelected].name, stores[storeSelected].competition);
  reset();
 } //_CODE_:competitionValue:262810:
 
@@ -119,13 +106,13 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  window1 = GWindow.getWindow(this, "Window title", 0, 0, 700, 500, JAVA2D);
+  window1 = GWindow.getWindow(this, "Window title", 0, 0, 480, 500, JAVA2D);
   window1.noLoop();
   window1.setActionOnClose(G4P.KEEP_OPEN);
   window1.addDrawHandler(this, "win_draw1");
-  numPeoples = new GCustomSlider(window1, 21, 247, 200, 40, "grey_blue");
+  numPeoples = new GCustomSlider(window1, 20, 250, 200, 40, "grey_blue");
   numPeoples.setShowValue(true);
-  numPeoples.setLimits(50, 1, 1000);
+  numPeoples.setLimits(500, 1, 1000);
   numPeoples.setNbrTicks(200);
   numPeoples.setNumberFormat(G4P.INTEGER, 0);
   numPeoples.setOpaque(false);
@@ -134,68 +121,78 @@ public void createGUI(){
   label1.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label1.setText("Amount of People");
   label1.setOpaque(false);
-  label6 = new GLabel(window1, 76, 290, 80, 20);
+  label6 = new GLabel(window1, 80, 310, 80, 20);
   label6.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label6.setText("Speed Scale");
   label6.setOpaque(false);
-  speedValue = new GCustomSlider(window1, 22, 331, 200, 40, "grey_blue");
+  speedValue = new GCustomSlider(window1, 20, 340, 200, 40, "grey_blue");
+  speedValue.setShowValue(true);
   speedValue.setLimits(30, 15, 240);
   speedValue.setNbrTicks(60);
   speedValue.setNumberFormat(G4P.INTEGER, 0);
   speedValue.setOpaque(false);
   speedValue.addEventHandler(this, "speedValueChanged");
-  label2 = new GLabel(window1, 69, 397, 80, 20);
+  label2 = new GLabel(window1, 80, 400, 80, 20);
   label2.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label2.setText("Stores");
   label2.setOpaque(false);
-  storeNum = new GCustomSlider(window1, 20, 435, 200, 40, "grey_blue");
+  storeNum = new GCustomSlider(window1, 20, 430, 200, 40, "grey_blue");
+  storeNum.setShowValue(true);
   storeNum.setLimits(6, 1, 6);
   storeNum.setNbrTicks(6);
   storeNum.setNumberFormat(G4P.INTEGER, 0);
   storeNum.setOpaque(false);
   storeNum.addEventHandler(this, "storeValChanged");
-  label3 = new GLabel(window1, 325, 211, 80, 20);
+  label3 = new GLabel(window1, 320, 215, 80, 20);
   label3.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label3.setText("Ratings");
   label3.setOpaque(false);
-  ratingValue = new GCustomSlider(window1, 260, 246, 200, 40, "grey_blue");
+  ratingValue = new GCustomSlider(window1, 260, 250, 200, 40, "grey_blue");
+  ratingValue.setShowValue(true);
   ratingValue.setLimits(1, 1, 5);
   ratingValue.setNumberFormat(G4P.INTEGER, 0);
   ratingValue.setOpaque(false);
   ratingValue.addEventHandler(this, "ratingValueChanged");
-  label4 = new GLabel(window1, 316, 299, 80, 20);
+  label4 = new GLabel(window1, 320, 310, 80, 20);
   label4.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label4.setText("Price");
   label4.setOpaque(false);
-  priceValue = new GCustomSlider(window1, 260, 331, 200, 40, "grey_blue");
+  priceValue = new GCustomSlider(window1, 260, 340, 200, 40, "grey_blue");
+  priceValue.setShowValue(true);
   priceValue.setLimits(10, 1, 1000);
   priceValue.setNbrTicks(100);
   priceValue.setNumberFormat(G4P.INTEGER, 0);
   priceValue.setOpaque(false);
   priceValue.addEventHandler(this, "priceValueChanged");
-  label5 = new GLabel(window1, 315, 397, 80, 20);
+  label5 = new GLabel(window1, 320, 400, 80, 20);
   label5.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label5.setText("Competition");
   label5.setOpaque(false);
-  competitionValue = new GCustomSlider(window1, 258, 434, 200, 40, "grey_blue");
+  competitionValue = new GCustomSlider(window1, 260, 430, 200, 40, "grey_blue");
+  competitionValue.setShowValue(true);
   competitionValue.setLimits(2, 1, 5);
   competitionValue.setNbrTicks(5);
   competitionValue.setNumberFormat(G4P.INTEGER, 0);
   competitionValue.setOpaque(false);
   competitionValue.addEventHandler(this, "competitionValueChanged");
-  pauseButton = new GButton(window1, 35, 74, 80, 30);
+  pauseButton = new GButton(window1, 25, 75, 80, 30);
   pauseButton.setText("PAUSE");
   pauseButton.setLocalColorScheme(GCScheme.RED_SCHEME);
   pauseButton.addEventHandler(this, "pauseButtonClicked");
-  restartButton = new GButton(window1, 35, 31, 80, 30);
+  restartButton = new GButton(window1, 25, 30, 80, 30);
   restartButton.setText("RESET");
   restartButton.setLocalColorScheme(GCScheme.GOLD_SCHEME);
   restartButton.addEventHandler(this, "restartButtonClicked");
-  imgButton1 = new GImageButton(window1, 178, 11, 191, 172, new String[] { "PRICE SCOUT Logo without background black.png", "PRICE SCOUT Logo without background black.png", "PRICE SCOUT Logo without background black.png" } );
+  imgButton1 = new GImageButton(window1, 105, -20, 209, 207, new String[] { "PRICE SCOUT Logo without background black.png", "PRICE SCOUT Logo without background black.png", "PRICE SCOUT Logo without background black.png" } );
   imgButton1.addEventHandler(this, "imgButton1_click1");
-  storeSelection = new GTextField(window1, 513, 43, 120, 30, G4P.SCROLLBARS_NONE);
+  storeSelection = new GTextField(window1, 333, 72, 120, 30, G4P.SCROLLBARS_NONE);
+  storeSelection.setText("Store A");
   storeSelection.setOpaque(true);
   storeSelection.addEventHandler(this, "storeSelectionChanged");
+  label7 = new GLabel(window1, 319, 49, 146, 16);
+  label7.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label7.setText("Select Store to Change");
+  label7.setOpaque(false);
   window1.loop();
 }
 
@@ -218,3 +215,4 @@ GButton pauseButton;
 GButton restartButton; 
 GImageButton imgButton1; 
 GTextField storeSelection; 
+GLabel label7; 

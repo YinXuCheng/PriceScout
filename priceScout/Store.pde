@@ -19,17 +19,17 @@ class Store {
   void display() {
     image(this.storeImg, this.position.x, this.position.y);  
     
-    fill(100);  
+    fill(0);  
     textSize(15);
 
     if (this.position.y > 300) {
-      text(this.name, this.position.x + 10, this.position.y - 20);  
-      text("Revenue: $" + this.revenue, this.position.x + 10, this.position.y - 40);  
+      text(this.name, this.position.x + 200, this.position.y - 20);  
+      text("Revenue: $" + this.revenue, this.position.x + 200, this.position.y - 40);  
     } 
     
     else {
-      text(this.name, this.position.x + 10, this.position.y + this.storeImg.height + 20);  
-      text("Revenue: $" + this.revenue, this.position.x + 10, this.position.y + this.storeImg.height + 40);  
+      text(this.name, this.position.x + 200, this.position.y + this.storeImg.height + 20);  
+      text("Revenue: $" + this.revenue, this.position.x + 200, this.position.y + this.storeImg.height + 40);  
     }
   }
   

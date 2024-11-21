@@ -1,9 +1,8 @@
 import g4p_controls.*;
 
-
 int storeSelected = 0;
 int numStores = 6;
-int numPeople = 20;
+int numPeople = 500;
 color red = color(255, 0, 0);
 int framePerSecond = 30;
 
@@ -16,13 +15,16 @@ float maxCompetition = 2;
 Store[] stores = new Store[6]; 
 ArrayList<Person> peoples;
 
+String[] storeNames = {"Store A", "Store B", "Store C", "Store D", "Store E", "Store F"};
+float[] ratings = {0, 0, 0, 0, 0, 0};
+float[] avgPrices = {10, 20, 15, 19, 16, 20};
+float[] competitions = {2.0, 1.5, 1.2, 1.0, 1.8, 1.3};
+float[] xPositions = {50, 50, 455, 455, 850, 850};
+float[] yPositions = {20, 500, 20, 500, 20, 500};
+
 void setup() {
   size(1200, 700);
   frameRate(framePerSecond);
-
- 
-
-
  
   reset();
   createGUI();
@@ -31,12 +33,6 @@ void setup() {
 void reset(){
   peoples = new ArrayList<Person>();
   
-  String[] storeNames = {"Store A", "Store B", "Store C", "Store D", "Store E", "Store F"};
-  float[] ratings = {0, 0, 0, 0, 0, 0};
-  float[] avgPrices = {10, 20, 15, 19, 16, 20};
-  float[] competitions = {2.0, 1.5, 1.2, 1.0, 1.8, 1.3};
-  float[] xPositions = {50, 50, 455, 455, 850, 850};
-  float[] yPositions = {20, 500, 20, 500, 20, 500};
   
    for (int i = 0; i < stores.length; i++) {
     stores[i] = new Store(storeNames[i], ratings[i], avgPrices[i], competitions[i], xPositions[i], yPositions[i]);
@@ -44,7 +40,7 @@ void reset(){
 
   for (int n = 0; n < numPeople; n++) {
     float speed = random(5, 10);  // Random speed
-    float money = random(10, 100);  // Random money between 10 and 100
+    float money = random(500, 2000);  // Random money between 500 and 1000
     color personColor = color(250, 10, 0);  // Random color
     
     Person person = new Person(speed, money, personColor);
