@@ -75,7 +75,12 @@ class Person {
     position.add(velocity);
     
     // Set the target y-position based on direction
-    targetPosition.y = movingRight ? 375 : 325; // 2 different values, one for moving right (below the line), one for moving left (above the line)
+    if (movingRight) {
+      targetPosition.y = 375;
+    }
+    else if (!movingRight) {
+      targetPosition.y = 325;
+    }
     
     // Smoothly adjust y-position towards the target
     position.y = lerp(position.y, targetPosition.y, 0.1);
@@ -135,7 +140,12 @@ class Person {
     isReturningToRoad = true;
     returningVertically = true;  // Start with vertical movement
     targetStore.saleMade();
-    targetPosition.y = movingRight ? 375 : 325;
+    if (movingRight) {
+      targetPosition.y = 375;
+    }
+    else if (!movingRight) {
+      targetPosition.y = 325;
+    }
     targetPosition.x = position.x;  // Keep the same x position initially
   }
 
@@ -149,7 +159,12 @@ class Person {
       if (abs(position.y - targetPosition.y) < 1) {
         // Vertical movement complete, start horizontal movement
         returningVertically = false;
-        targetPosition.x = movingRight ? width + 50 : -50;
+        if (movingRight) {
+          targetPosition.x = 50;
+        }
+        else if (!movingRight) {
+          targetPosition.x = -50;
+        }
       }
     }
     
@@ -170,7 +185,17 @@ class Person {
 
   // Helper function to get the sign of a number
   float sign(float x) {
-    return x > 0 ? 1 : (x < 0 ? -1 : 0);
+    if (x > 0) {
+    return float(1);
+    }
+    
+    else if (x < 0) {
+      return float(-1);
+      }
+      
+    else {
+      return float(0);
+    }
   }
   
   void chooseStore() {
