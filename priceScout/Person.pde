@@ -144,12 +144,12 @@ class Person {
     returningVertically = true;  // Start with vertical movement
     targetStore.saleMade(); // a person will always go to a store if they make a transaction. this adds a salemade to the store they went to.
     if (movingRight) { // if the person is going to move right
-      targetPosition.y = 375; // person has to go to this y-value to stay under the road line
+      targetPosition.y = 375; // person has to go to this y-value to stay under the road line ///////
     }
     else if (!movingRight) { // if the person is not going to move right (if they are going to move left)
       targetPosition.y = 325; // person has to go to this y-value to stay above the road line
     }
-    targetPosition.x = position.x;  // Keep the same x position initially
+    position.x = targetPosition.x;  // Keep the same x position initially /////////////
   }
 
   // person is returning to road
