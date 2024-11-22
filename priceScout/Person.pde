@@ -149,7 +149,7 @@ class Person {
     else if (!movingRight) { // if the person is not going to move right (if they are going to move left)
       targetPosition.y = 325; // person has to go to this y-value to stay above the road line
     }
-    position.x = targetPosition.x;  // Keep the same x position initially /////////////
+    targetPosition.x = position.x;  // Keep the same x position initially /////////////
   }
 
   // person is returning to road
@@ -164,11 +164,12 @@ class Person {
       if (abs(position.y - targetPosition.y) < 1) { // if the person's position - targetposition is less than 1 pixel (if they are alligned to the road)
         
         // Vertical movement complete, start horizontal movement
+        position.y = targetPosition.y; //immediately set y position to prevent offset
         returningVertically = false; // stop moving vertically
         if (movingRight) { // if the person is going to move right
-          targetPosition.x = 50; // person will start moving right
+          targetPosition.x = width + 50; // person will start moving right
         }
-        else if (!movingRight) { // if the person is not going to the right (going to the left)
+        else { // if the person is not going to the right (going to the left)
           targetPosition.x = -50; // person will start moving left
         }
       }
