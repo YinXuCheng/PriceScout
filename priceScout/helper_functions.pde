@@ -8,8 +8,8 @@ float calculateAttractionPercentage(float price, float maxPrice, float rating, f
     float ratingScore = rating / maxRating; // the higher the rating the higher the score
     float competitionScore = 1 - (competition / maxCompetition); // the less competiton the smaller the fraction and the larger the score
 
-    float priceWeight = 0.4; // weights used in calculation
-    float ratingWeight = 0.4;
+    float priceWeight = 0.6; // weights used in calculation
+    float ratingWeight = 0.2;
     float competitionWeight = 0.2;
     
     // Calculate attraction just like grades, price score + rating score + competiton score with their respective weight

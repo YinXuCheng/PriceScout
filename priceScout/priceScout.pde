@@ -6,7 +6,8 @@ int numPeople = 500; // Number of people displayed on screen
 color red = color(255, 0, 0); // Color for the people
 int framePerSecond = 30; // Determines how fast the animation runs
 boolean isPaused = false; // Used for the pause and start button
-float maxPrice = 1000; // Max price for each store used for formula
+// The max is not the upper limit but insted how much stores can go up to until they start getting negative price scores in the calcualte attraction function
+float maxPrice = 50; // Max price for each store used for formula
 float maxRating = 5; // Max rating used for each store used for forumla
 float maxCompetition = 2; // Max competiton used for formula
 Store[] stores = new Store[6]; // Array with the store objects
