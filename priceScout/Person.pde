@@ -217,8 +217,8 @@ class Person {
     }
 
     // If no store was chosen (all attractions were 0), choose a random store
-    if (targetStore == null) {
-      targetStore = stores[int(random(6))];
+    if (targetStore == null) { // if the person has not chosen a store to go to yet
+      targetStore = stores[int(random(6))]; // person randomly goes to a store
     }
   }
 }
