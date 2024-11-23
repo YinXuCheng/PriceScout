@@ -127,14 +127,6 @@ class Person {
   void enterStore() {
     isInStore = true; // boolean value of being inside a store is assumes
     storeEntryTime = second(); // counting how long the person has been inside the store by seconds
-    
-    //if (targetStore.position.y <= 300) {
-    //  position.set(targetStore.position.x + 175, targetStore.position.y + 91.5);
-    //}
-    
-    // else if (targetStore.position.y >= 300) {
-    //  position.set(targetStore.position.x + 125, targetStore.position.y + 91.5);
-    // }
   }
   
   // these lines of code run IF the person leave's the store
@@ -157,7 +149,7 @@ class Person {
     if (returningVertically) { // ran every frame, so if they are still returning to the road vertically
       
       // Move vertically first
-      float dy = targetPosition.y - position.y; // 
+      float dy = targetPosition.y - position.y;
       float moveY = min(abs(dy), abs(velocity.x)) * sign(dy); // calculating the direction
       position.y += moveY; // changes the current y-position of the person to the y position it's supposed to move to
 
