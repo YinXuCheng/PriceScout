@@ -2,7 +2,7 @@ import g4p_controls.*;
 
 int storeSelected = 0; // Used for the text field
 int numStores = 6; // Number of stores displayed on screen
-int numPeople = 20; // Number of people displayed on screen
+int numPeople = 500; // Number of people displayed on screen
 color red = color(255, 0, 0); // Color for the people
 int framePerSecond = 30; // Determines how fast the animation runs
 boolean isPaused = false; // Used for the pause and start button
