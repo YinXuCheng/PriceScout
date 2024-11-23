@@ -1,4 +1,5 @@
 class Store {
+  // Fields
   String name;
   float rating, avgPrice, competition, revenue;
   PVector position = new PVector();  
@@ -17,12 +18,12 @@ class Store {
   }
 
   void display() {
-    image(this.storeImg, this.position.x, this.position.y);  
+    image(this.storeImg, this.position.x, this.position.y); // Load the image at the correct position
     
     fill(0);  
     textSize(15);
 
-    if (this.position.y > 300) {
+    if (this.position.y > 300) { // Figure out if the store is on the top or bottom to determine where to put the text beside it
       text(this.name, this.position.x + 200, this.position.y - 20);  
       text("Revenue: $" + this.revenue, this.position.x + 200, this.position.y - 40);  
     } 
@@ -34,7 +35,7 @@ class Store {
   }
   
 
-  void saleMade() {
+  void saleMade() { // Keep track of total revenue
     this.revenue += this.avgPrice;
   }
 }

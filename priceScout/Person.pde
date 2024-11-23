@@ -204,22 +204,22 @@ class Person {
 }
   
   void chooseStore() {
-   float[] attractions = new float[stores.length]; 
-   float totalAttraction = 0;
+   float[] attractions = new float[stores.length]; // Array containting attractions percentages
+   float totalAttraction = 0; // Define new varible used later
    
-   for (int i = 0; i < numStores; i++) {
+   for (int i = 0; i < numStores; i++) { // Calculate percentages for every store based on paramaters and the customers budget
      attractions[i] = calculateAttractionPercentage(stores[i].avgPrice, maxPrice, stores[i].rating, maxRating, stores[i].competition, maxCompetition, this.money);
-     totalAttraction += attractions[i];
+     totalAttraction += attractions[i]; // add attraction to total attraction
    }
    
    if (totalAttraction > 0) {
-     float randomValue = random(0, totalAttraction);
-     float cumulativeAttraction = 0;
+     float randomValue = random(0, totalAttraction); // Random number between 0 and total attraction value
+     float cumulativeAttraction = 0; // define new varible
        for (int i = 0; i < stores.length; i++) {
-          cumulativeAttraction += attractions[i];
+          cumulativeAttraction += attractions[i]; // add attractions percentages one by one to cumlative
           if (randomValue <= cumulativeAttraction) {
-              targetStore = stores[i];
-              break;
+              targetStore = stores[i]; // As soon as the cumalative attraction becomes greater than the random value generated, it picks the store it just added the attraction percentage for
+              break; // This is to ensure that not everybody just goes to the store with the highest attraction percentage as that is not very realistic
         }
       }
     }

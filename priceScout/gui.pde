@@ -19,65 +19,62 @@ synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:windo
 } //_CODE_:window1:251840:
 
 public void amountOfPeopleChanged(GCustomSlider source, GEvent event) { //_CODE_:numPeoples:824157:
-  numPeople = numPeoples.getValueI();
-  reset();
+  numPeople = numPeoples.getValueI(); // get the value of amount of people
+  reset(); // call the reset function to restart the animations to avoid errors
 
 } //_CODE_:numPeoples:824157:
 
 public void speedValueChanged(GCustomSlider source, GEvent event) { //_CODE_:speedValue:603430:
-  framePerSecond = speedValue.getValueI(); 
-  frameRate(framePerSecond);
+  framePerSecond = speedValue.getValueI(); // get value of frames
+  frameRate(framePerSecond); // setting the frames 
 } //_CODE_:speedValue:603430:
 
 public void storeValChanged(GCustomSlider source, GEvent event) { //_CODE_:storeNum:836312:
-  numStores = storeNum.getValueI();
-  reset();
+  numStores = storeNum.getValueI(); // get the value of number of stores
+  reset(); // call reset function to avoid people going into invisible stores
 } //_CODE_:storeNum:836312:
 
 public void ratingValueChanged(GCustomSlider source, GEvent event) { //_CODE_:ratingValue:654194:
-  ratings[storeSelected] = ratingValue.getValueF();
-  reset();
-  println(stores[storeSelected].name, stores[storeSelected].rating);
+  ratings[storeSelected] = ratingValue.getValueF(); // get rating
+  reset(); // reset to update
 } //_CODE_:ratingValue:654194:
 
 public void priceValueChanged(GCustomSlider source, GEvent event) { //_CODE_:priceValue:334359:
-  avgPrices[storeSelected] = priceValue.getValueF();
-  reset();
-  println(stores[storeSelected].name, stores[storeSelected].avgPrice);
+  avgPrices[storeSelected] = priceValue.getValueF(); // get price from array as it is updated
+  reset(); // reset to update
   //reset();
 } //_CODE_:priceValue:334359:
 
 public void competitionValueChanged(GCustomSlider source, GEvent event) { //_CODE_:competitionValue:262810:
- stores[storeSelected].competition = competitionValue.getValueF();
- println( stores[storeSelected].name, stores[storeSelected].competition);
- reset();
+ stores[storeSelected].competition = competitionValue.getValueF(); // get competition
+ reset(); // reset to update
 } //_CODE_:competitionValue:262810:
 
 public void pauseButtonClicked(GButton source, GEvent event) { //_CODE_:pauseButton:257018:
-  isPaused = !isPaused;
+  isPaused = !isPaused; // switch value of boolean from true to false or false to true
   
-  if (pauseButton.getText().equals("PAUSE")) {
+  if (pauseButton.getText().equals("PAUSE")) { // when pause is clicked set text to resume and make button green
     pauseButton.setText("RESUME");
     pauseButton.setLocalColorScheme(GCScheme.GREEN_SCHEME);
-    noLoop();
+    noLoop(); // stop the loop which pauses the display
   }
   
-  else {
+  else { // when resume is clicked set text to pause and make button red
     pauseButton.setText("PAUSE");
     pauseButton.setLocalColorScheme(GCScheme.RED_SCHEME);
-    loop();
+    loop(); // starts the loop which unpauses the display
   }
 } //_CODE_:pauseButton:257018:
 
 public void restartButtonClicked(GButton source, GEvent event) { //_CODE_:restartButton:260887:
-  reset();
+  reset(); // restart when reset button is clicked
 } //_CODE_:restartButton:260887:
 
 public void imgButton1_click1(GImageButton source, GEvent event) { //_CODE_:imgButton1:602797:
 } //_CODE_:imgButton1:602797:
 
 public void storeSelectionChanged(GTextField source, GEvent event) { //_CODE_:storeSelection:386701:
-   if (storeSelection.getText().equals("Store A")) {
+   if (storeSelection.getText().equals("Store A")) { // Determine which store is enterd into the text field to be used in other slider function
     storeSelected = 0;
   }
   if (storeSelection.getText().equals("Store B")) {
