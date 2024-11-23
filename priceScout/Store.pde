@@ -18,24 +18,35 @@ class Store {
   }
 
   void display() {
-    image(this.storeImg, this.position.x, this.position.y); // Load the image at the correct position
+    // Draw the store image
+    image(this.storeImg, this.position.x, this.position.y);
     
+    // Set text properties
     fill(0);  
     textSize(15);
+    
+    float textX = this.position.x + 200;  // X-position for the text
+    float textY;  // Y-position for the text
 
-    if (this.position.y > 300) { // Figure out if the store is on the top or bottom to determine where to put the text beside it
-      text(this.name, this.position.x + 200, this.position.y - 20);  
-      text("Revenue: $" + this.revenue, this.position.x + 200, this.position.y - 40);  
+    // Adjust Y-position based on whether the store is on the top or bottom
+    if (this.position.y > 300) {
+      textY = this.position.y - 80; // Position above the store
     } 
     
     else {
-      text(this.name, this.position.x + 200, this.position.y + this.storeImg.height + 20);  
-      text("Revenue: $" + this.revenue, this.position.x + 200, this.position.y + this.storeImg.height + 40);  
+      textY = this.position.y + this.storeImg.height + 10; // Position below the store
     }
+    
+    // Display the store's information
+    text(this.name, textX, textY);
+    text("Revenue: $" + this.revenue, textX, textY + 20);  
+    text("Price: $" + this.avgPrice, textX, textY + 40);  
+    text("Rating: " + this.rating, textX, textY + 60);  
+    text("Competition: " + this.competition, textX, textY + 80);  
   }
-  
 
-  void saleMade() { // Keep track of total revenue
+  // Track revenue when a sale is made
+  void saleMade() { 
     this.revenue += this.avgPrice;
   }
 }
